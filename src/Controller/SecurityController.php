@@ -44,7 +44,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="app_registration")
      */
-    public function registration(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder): Response
+    public function registration(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder)
     {
         $user = new User;
         $form = $this->createForm(RegistrationType::class, $user);
@@ -55,6 +55,7 @@ class SecurityController extends AbstractController
             $user->setPassword($hash);
             $em->persist($user);
             $em->flush();
+            return $this->redirectToRoute('app_login');
         }
         return $this->render(
             'security/registration.html.twig',
