@@ -73,7 +73,11 @@
                     <li><a href="{{path("produitList")}}">Shop</a></li>
                     <li><a href="{{asset('product-details.html')}}">Product</a></li>
                     <li><a href="{{asset('cart.html')}}">Cart</a></li>
-                    <li><a href="{{asset('checkout.html')}}">Checkout</a></li>
+                    {% if not app.user %}
+                    <li><a href="{{path("app_login")}}">Login</a></li>
+                    {% else %}
+                    <li><a href="{{path("app_logout")}}">Logout</a></li>
+                    {% endif %}
                 </ul>
             </nav>
             <!-- Button Group -->
